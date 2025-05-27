@@ -1,0 +1,76 @@
+/* ----------------------------- */
+/* PAGE DE CONNEXION ADMIN/CLIENT */
+/* ----------------------------- */
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    padding: 2rem;
+  }
+  
+  .login-box {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--card-bg);
+    border-radius: 2rem;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border: 2px solid var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  .login-box h1 {
+    text-align: center;
+    font-family: "Fascinate", cursive;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+  
+  .login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .login-box label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  
+  .login-box input {
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border 0.3s ease;
+  
+    &:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+  }
+  
+  .login-box button {
+    margin-top: 1.5rem;
+    padding: 0.9rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #36974d;
+    }
+  }
+  
