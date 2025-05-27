@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <main>
       <Header />
-      <Banner title={content.title} subtitle={content.subtitle} video={content.video} />
+      <Banner title={content.titre} subtitle={content.subtitle} video={content.video} />
       <CardsSection content={content} />
       <Collapse content={content} />
       <Carousel content={content} />

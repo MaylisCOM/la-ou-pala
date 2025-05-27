@@ -1,6 +1,5 @@
 "use client";
 
-import '../global-dashboard.scss';
 import Link from 'next/link';
 import { FaEdit } from 'react-icons/fa';
 import Sidebar from '../../components/Sidebar';
@@ -14,21 +13,24 @@ const pages = [
 
 export default function Pages() {
   return (
-    <div className={styles.dashboardWrapper}>
-      <Sidebar />
-      <div className={styles.contentArea}>
-        <h1 className={styles.title}>Pages du site</h1>
-        <ul className={styles.pageList}>
+    <div className="container">
+      <aside className="sidebar-container">
+        <Sidebar />
+      </aside>
+      <section className="content">
+        <h1 className="title">Pages du site</h1>
+        <ul className="pageList">
           {pages.map((page) => (
-            <li key={page.id} className={styles.pageItem}>
+            <li key={page.id} className="pageItem">
               <span>{page.name}</span>
-              <Link href={`/dashboard/pages/${page.id}`} className={styles.editButton}>
+              <Link href={`/dashboard/pages/${page.id}`} className="editButton">
                 <FaEdit /> Modifier
               </Link>
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </div>
   );
 }
+ 

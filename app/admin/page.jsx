@@ -1,28 +1,33 @@
-// app/admin/page.jsx
 'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import './global-admin.scss';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import '../../lib/firebase';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const auth = getAuth();
 
-    if (username === 'admin' && password === 'admin123') {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const tokenResult = await user.getIdTokenResult();
+
+      const role = tokenResult.claims.role || 'client';
+
       localStorage.setItem('auth', 'true');
-      localStorage.setItem('role', 'admin');
+      localStorage.setItem('role', role);
+
       router.push('/dashboard');
-    } else if (username === 'client' && password === 'client123') {
-      localStorage.setItem('auth', 'true');
-      localStorage.setItem('role', 'client');
-      router.push('/dashboard');
-    } else {
-      alert("Identifiants incorrects");
+    } catch (error) {
+      alert('Identifiants incorrects');
+      console.error(error);
     }
   };
 
@@ -31,24 +36,25 @@ export default function LoginPage() {
       <div className="login-box">
         <h1>Connexion</h1>
         <form onSubmit={handleLogin}>
-          <label>Identifiant</label>
+          <label>Adresse e-mail</label>
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-  
+
           <label>Mot de passe</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-  
+
           <button type="submit">Se connecter</button>
         </form>
       </div>
     </div>
   );
-  
 }

@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import './global-dashboard.scss';
+import Sidebar from '../../../components/Sidebar';
+import '../../global-dashboard.scss';
+import { labelMap } from '../../../../lib/labels';
 
 export default function EditPage() {
   const { id } = useParams();
@@ -42,30 +44,85 @@ export default function EditPage() {
     alert('Contenu mis à jour !');
   };
 
+  const getLabel = (key) => {
+    if (key === 'titre') return 'Titre Banner';
+    return labelMap[key] || key;
+  };
+
+  const groupedSections = {
+    Banner: ['titre', 'subtitle', 'video'],
+    Collapse: Object.keys(formData).filter(k => k.startsWith('collapse')),
+    Carousel: Object.keys(formData).filter(k => k.startsWith('carousel')),
+    Cards: Object.keys(formData).filter(k => k.startsWith('cards') || k.startsWith('card')),
+  };
+
   if (isLoading) return <p>Chargement...</p>;
 
   return (
-    <div className={styles.wrapper}>
-      <Sidebar />
-      <main className={styles.main}>
-        <h1>Modifier la page : {id}</h1>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {Object.keys(formData).map((key) => (
-            <div key={key} className={styles.inputGroup}>
-              <label>{key}</label>
-              {key.includes('img') || key.includes('video') ? (
-                <>
-                  <input type="text" name={key} value={formData[key]} onChange={handleChange} />
-                  <input type="file" name={key} accept="image/*,video/*" onChange={handleFileChange} />
-                </>
-              ) : (
-                <textarea name={key} value={formData[key]} onChange={handleChange} />
-              )}
+    <div className="container">
+      <aside className="sidebar">
+        <Sidebar />
+      </aside>
+
+      <section className="content">
+        <div className="editor">
+          <div className="editorHeader">
+            <h2> Modification de la page d'accueil</h2>
+            <div className="editorActions">
+            <button
+              className="previewBtn"
+              type="button"
+              onClick={() => window.open(id === 'index' ? '/' : `/${id}`, '_blank')}
+              >
+              Preview
+           </button>   
+           <button className="saveBtn" type="button" onClick={handleSubmit}>Save</button>
             </div>
-          ))}
-          <button type="submit" className={styles.submit}>Enregistrer</button>
-        </form>
-      </main>
+          </div>
+
+          <form onSubmit={handleSubmit} className="editorForm">
+            {Object.entries(groupedSections).map(([section, keys]) => (
+              <div className="editorSection" key={section}>
+                <h2 className="editorSectionTitle">{section}</h2>
+                {keys
+                  .filter((key) => key !== 'image' && !key.includes('alt'))
+                  .map((key) => (
+                    formData[key] !== undefined && (
+                    <div key={key} className="editorBlock">
+                      <label className="editorLabel">{getLabel(key)}</label>
+                      {key.includes('img') || key.includes('video') ? (
+                        <div className="mediaUpload">
+                          <input
+                            type="text"
+                            name={key}
+                            value={formData[key]}
+                            onChange={handleChange}
+                            className="mediaURL"
+                          />
+                          <input
+                            type="file"
+                            name={key}
+                            accept="image/*,video/*"
+                            onChange={handleFileChange}
+                            className="mediaFile"
+                          />
+                        </div>
+                      ) : (
+                        <textarea
+                          name={key}
+                          value={formData[key]}
+                          onChange={handleChange}
+                          className="editorTextarea"
+                        />
+                      )}
+                    </div>
+                  )
+                ))}
+              </div>
+            ))}
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
