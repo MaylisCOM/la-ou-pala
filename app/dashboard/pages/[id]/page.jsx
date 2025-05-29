@@ -10,6 +10,7 @@ export default function EditPage() {
   const { id } = useParams();
   const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [mediaOptions, setMediaOptions] = useState([]);
 
   useEffect(() => {
     fetch(`/api/content?page=${id}`)
@@ -17,6 +18,15 @@ export default function EditPage() {
       .then(data => {
         setFormData(data);
         setIsLoading(false);
+      });
+
+    fetch('/api/content')
+      .then(res => res.json())
+      .then(data => {
+        const values = Object.values(data);
+        const options = values.filter(val => typeof val === 'string' && val.match(/\.(png|jpe?g|webp|svg|mp4)$/))
+                               .map(path => path.replace(/^\/img\//, ''));
+        setMediaOptions(options);
       });
   }, [id]);
 
@@ -60,23 +70,23 @@ export default function EditPage() {
 
   return (
     <div className="container">
-      <aside className="sidebar">
+      <aside className="sidebar-container">
         <Sidebar />
       </aside>
 
       <section className="content">
         <div className="editor">
           <div className="editorHeader">
-            <h2> Modification de la page d'accueil</h2>
+            <h1> Modification de la page d'accueil</h1>
             <div className="editorActions">
-            <button
-              className="previewBtn"
-              type="button"
-              onClick={() => window.open(id === 'index' ? '/' : `/${id}`, '_blank')}
+              <button
+                className="previewBtn"
+                type="button"
+                onClick={() => window.open(id === 'index' ? '/' : `/${id}`, '_blank')}
               >
-              Preview
-           </button>   
-           <button className="saveBtn" type="button" onClick={handleSubmit}>Save</button>
+                Preview
+              </button>
+              <button className="saveBtn" type="button" onClick={handleSubmit}>Save</button>
             </div>
           </div>
 
@@ -88,36 +98,41 @@ export default function EditPage() {
                   .filter((key) => key !== 'image' && !key.includes('alt'))
                   .map((key) => (
                     formData[key] !== undefined && (
-                    <div key={key} className="editorBlock">
-                      <label className="editorLabel">{getLabel(key)}</label>
-                      {key.includes('img') || key.includes('video') ? (
-                        <div className="mediaUpload">
-                          <input
-                            type="text"
+                      <div key={key} className="editorBlock">
+                        <label className="editorLabel">{getLabel(key)}</label>
+                        {key.includes('img') || key.includes('video') ? (
+                          <div className="mediaUpload">
+                            <select
+                              name={key}
+                              value={formData[key].replace(/^\/img\//, '')}
+                              onChange={(e) => handleChange({ target: { name: key, value: '/img/' + e.target.value } })}
+                              className="mediaSelect"
+                            >
+                              <option value="">-- Sélectionner une ressource existante --</option>
+                              {mediaOptions.map((name, i) => (
+                                <option key={i} value={name}>{name}</option>
+                              ))}
+                            </select>
+
+                            <input
+                              type="file"
+                              name={key}
+                              accept="image/*,video/*"
+                              onChange={handleFileChange}
+                              className="mediaFile"
+                            />
+                          </div>
+                        ) : (
+                          <textarea
                             name={key}
                             value={formData[key]}
                             onChange={handleChange}
-                            className="mediaURL"
+                            className="editorTextarea"
                           />
-                          <input
-                            type="file"
-                            name={key}
-                            accept="image/*,video/*"
-                            onChange={handleFileChange}
-                            className="mediaFile"
-                          />
-                        </div>
-                      ) : (
-                        <textarea
-                          name={key}
-                          value={formData[key]}
-                          onChange={handleChange}
-                          className="editorTextarea"
-                        />
-                      )}
-                    </div>
-                  )
-                ))}
+                        )}
+                      </div>
+                    )
+                  ))}
               </div>
             ))}
           </form>

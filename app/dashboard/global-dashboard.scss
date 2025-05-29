@@ -5,6 +5,8 @@
   --tertiary-color: #FDB57B;
   --fourth-color: #F46734;
   --fifth-color: #ED1E37;
+  --primary-color-rgb: 71, 175, 90;
+
 
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -28,6 +30,7 @@ body.dark {
 /* ----------------------------- */
 body{
   overflow: hidden;
+  background-color: var(--text-color);
 }
 
 .container {
@@ -39,7 +42,6 @@ body{
     height: 98vh;
     grid-template-columns: 201px 1fr;
     gap: 2rem;
-    background-color: var(--header-bg);
     .content{
       overflow: overlay;
     }
@@ -48,41 +50,137 @@ body{
   /* ----------------------------- */
   /* SIDEBAR                      */
   /* ----------------------------- */
-  
-  .sidebar {
-    background-color: transparent;
-    border: none;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: 100%;
-    max-width: 84%;
+  .sidebar-container{
+    height: 92vh;
   }
-  
-  .sidebar a {
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--text-color);
-    padding: 0.75rem 1rem;
-    border-radius: 1rem;
-    transition: background 0.3s;
-  }
-  
-  .sidebar a:hover {
-    background-color: var(--primary-color);
-    color: var(--invers-text-color);
-  }
-  
+  /* ----------------------------- */
+/* SIDEBAR MODERNE              */
+/* ----------------------------- */
+
+.sidebar-modern {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 88vh;
+  width: 92%;
+  background: rgba(var(--primary-color-rgb), 0.4);
+
+  padding: 2rem 1.5rem;
+  border-right: 1px solid (var(--primary-color-rgb));
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #0f172a;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 2px solid #64748b;
+}
+
+.greeting {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--invers-text-color);
+  margin: 0;
+}
+
+.sidebar-menu {
+  flex-grow: 1;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--invers-text-color);
+  text-transform: uppercase;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--invers-text-color);
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--primary-color);
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1rem;
+}
+
+.settings-icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.create-task {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.logout {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #94a3b8;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  width: 100%;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: var(--primary-color);
+}
+
   /* ----------------------------- */
   /* DASHBOARD HOME CONTENT       */
   /* ----------------------------- */
   
   .content {
-    background-color: var(--card-bg);
     padding: 3rem;
-    border-radius: 2rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    padding-top: 2rem;
   }
   
   .title {
@@ -90,13 +188,13 @@ body{
     font-family: Apple Braille;
     font-weight: 300;
     margin-bottom: 1rem;
-    color: var(--text-color);
+    color: var(--invers-text-color);
   }
   
   .description {
     font-size: 1.2rem;
     margin-bottom: 2.5rem;
-    color: var(--text-color);
+    color: var(--invers-text-color);
     font-family: Arial, sans-serif;
     max-width: 70ch;
   }
@@ -152,49 +250,72 @@ body{
   /* ----------------------------- */
   /* PAGES SECTION LISTING        */
   /* ----------------------------- */
-  
-  .pageList {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .pageItem {
-    background: var(--card-bg);
-    padding: 1.2rem 1.8rem;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-    transition: background 0.3s;
-  }
-  
-  .pageItem span {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-color);
-  }
-  
-  .editButton {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    text-decoration: none;
-    background-color: var(--primary-color);
-    color: var(--invers-text-color);
-    padding: 0.5rem 1rem;
-    border-radius: 0.6rem;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  
-  .editButton:hover {
-    background-color: #36974d;
-  }
+
+.pageTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background-color: rgba(var(--primary-color-rgb), 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.pageTable thead {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.pageTable th,
+.pageTable td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: var(--invers-text-color);
+}
+
+.pageTable tbody tr:nth-child(even) {
+  background-color: rgba(var(--primary-color-rgb), 0.4);
+}
+
+.pageTable .title{
+  width: 85%;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.pageTable .actions {
+  display: flex;
+  width: 18%;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pageTable .editButton,
+.pageTable .viewButton,
+.pageTable .deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--invers-text-color);
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.pageTable .editButton:hover {
+  color: var(--primary-color);
+}
+
+.pageTable .viewButton:hover {
+  color: var(--fourth-color);
+}
+
+.pageTable .deleteButton:hover {
+  color: var(--fifth-color);
+}
+
   
   /* ----------------------------- */
   /* EDIT PAGE FORM               */
@@ -385,4 +506,118 @@ body{
       background-color: #36974d;
     }
   }
+}
+
+/* ----------------------------- */
+/* MEDIA PAGE STYLES            */
+/* ----------------------------- */
+
+.media-library {
+  padding: 2rem;
+}
+
+.media-library h1 {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.media-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.media-item img,
+.media-item video {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.media-item span {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.drop-zone {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.drop-zone.dragover {
+  background-color: #e0e0e0;
+}
+
+.drop-zone input {
+  display: none;
+}
+
+/* Optional: Style for media select */
+.mediaUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mediaSelect {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 11vh;
+}
+
+.mediaURL {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.mediaFile {
+  padding: 0.5rem 0;
+}
+
+
+/* ----------------------------- */
+/* DROPZONE UPLOAD              */
+/* ----------------------------- */
+.upload-dropzone {
+  border: 2px dashed #aaa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #555;
+  font-weight: 500;
+}
+
+.upload-dropzone.drag-over {
+  background-color: #e0f7ff;
+  border-color: #0077cc;
+  color: #0077cc;
 }
