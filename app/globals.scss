@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
 
+/*--------------------------------------
+  VARIABLES ET THÈME (LIGHT / DARK)
+--------------------------------------*/
 :root {
   --primary-color: #47AF5A;
   --seconday-color: #F5CE2C;
@@ -24,15 +27,17 @@ body.dark {
   --link-color: #ffffff;
 }
 
-/* BODY */
-details{
+/*--------------------------------------
+  RESET ET RÈGLES GÉNÉRALES
+--------------------------------------*/
+details {
   overflow-x: clip;
-  summary{
+  summary {
     display: none;
   }
 }
 
-h1{
+h1 {
   font-family: "Fascinate", system-ui;
   font-weight: 400;
   font-style: normal;
@@ -44,7 +49,9 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* MODE */
+/*--------------------------------------
+  HEADER (MODE, LOGO, TOGGLE)
+--------------------------------------*/
 .header-container {
   display: flex;
   align-items: center;
@@ -52,7 +59,7 @@ body {
   width: 97%;
   margin: 1rem auto 0;
 
-  img{
+  img {
     width: 8%;
   }
 
@@ -67,7 +74,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-  
+
     img {
       position: absolute;
       width: 60%;
@@ -75,26 +82,25 @@ body {
       object-fit: contain;
       transition: opacity 0.3s ease;
     }
-  
+
     .icon-lune {
       opacity: 1;
     }
-  
+
     .icon-soleil {
       opacity: 0;
     }
   }
-  
+
   body.dark #theme-toggle {
     .icon-lune {
       opacity: 0;
     }
-  
+
     .icon-soleil {
       opacity: 1;
     }
   }
-  
 
   .main-header {
     flex: 1;
@@ -103,7 +109,9 @@ body {
   }
 }
 
-/* MENU */
+/*--------------------------------------
+  MENU PRINCIPAL
+--------------------------------------*/
 .main-header {
   display: flex;
   justify-content: end;
@@ -119,9 +127,8 @@ body {
     border: 2px solid var(--text-color);
     padding: 0.5rem 1rem;
     border-radius: 2rem;
-    font-size: 1rem;
-    font-weight: 600;
     font-size: 2rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -170,9 +177,9 @@ body {
   }
 }
 
-
-
-/* BANNER */
+/*--------------------------------------
+  SECTION BANNER
+--------------------------------------*/
 #Banner {
   width: 100%;
   overflow: hidden;
@@ -193,6 +200,9 @@ body {
     p {
       text-align: center;
       color: var(--text-color);
+      width: 41%;
+      line-height: 1.6;
+      margin: auto;
     }
   }
 
@@ -224,6 +234,7 @@ body {
       background-repeat: no-repeat;
       background-position: center;
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -238,6 +249,7 @@ body {
       background-repeat: no-repeat;
       background-position: center;
     }
+
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
@@ -256,7 +268,9 @@ body {
   }
 }
 
-/* GALLERY */
+/*--------------------------------------
+  GALERIE (GALLERY)
+--------------------------------------*/
 .grid-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -287,7 +301,9 @@ body {
   }
 }
 
-/* COLLAPSE */
+/*--------------------------------------
+  COMPOSANT COLLAPSE
+--------------------------------------*/
 .collapse {
   color: #000000;
   padding: 10vh 0vw 10Vh 46vh;
@@ -297,30 +313,34 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    .collapse__item:nth-child(1){
+
+    .collapse__item:nth-child(1) {
       border: 3px solid var(--primary-color);
       color: var(--text-color);
       background-color: var(--primary-color);
       padding: 2rem 0;
     }
-    .collapse__item:nth-child(3){
+
+    .collapse__item:nth-child(3) {
       border: 3px solid var(--tertiary-color);
       color: var(--text-color);
       background-color: var(--tertiary-color);
       padding: 2rem 0;
     }
-    .collapse__item:nth-child(5){
+
+    .collapse__item:nth-child(5) {
       border: 3px solid var(--fifth-color);
       color: var(--text-color);
       background-color: var(--fifth-color);
       padding: 2rem 0;
     }
+
     .collapse__item {
       display: flex;
       align-items: center;
       gap: 0;
       position: relative;
-  
+
       img {
         width: 0;
         opacity: 0;
@@ -328,7 +348,7 @@ body {
         transition: opacity 0.3s ease, transform 0.3s ease;
         pointer-events: none;
       }
-  
+
       p {
         font-size: 5rem;
         font-family: "Fascinate", system-ui;
@@ -338,7 +358,7 @@ body {
         cursor: pointer;
         color: var(--text-color);
       }
-  
+
       &:hover {
         img {
           opacity: 1;
@@ -346,34 +366,34 @@ body {
           width: 200px;
           height: auto;
         }
-  
+
         p {
           transform: translateX(27px) !important;
           font-size: 4.5rem;
         }
       }
 
-      &:hover:nth-child(1){
+      &:hover:nth-child(1) {
         border: 3px solid var(--primary-color);
         color: var(--primary-color);
         background-color: transparent;
         padding: 0;
       }
-      &:hover:nth-child(2){
+      &:hover:nth-child(2) {
         border: 3px solid var(--seconday-color);
         color: var(--seconday-color);
       }
-      &:hover:nth-child(3){
+      &:hover:nth-child(3) {
         border: 3px solid var(--tertiary-color);
         color: var(--tertiary-color);
         background-color: transparent;
         padding: 0;
       }
-      &:hover:nth-child(4){
+      &:hover:nth-child(4) {
         border: 3px solid var(--fourth-color);
         color: var(--fourth-color);
       }
-      &:hover:nth-child(5){
+      &:hover:nth-child(5) {
         border: 3px solid var(--fifth-color);
         color: var(--fifth-color);
         background-color: transparent;
@@ -381,10 +401,11 @@ body {
       }
     }
   }
-  
 }
 
-/* TWO COLUMNS */
+/*--------------------------------------
+  SECTION TWO-COLUMNS
+--------------------------------------*/
 .two-columns {
   display: flex;
   align-items: center;
@@ -465,7 +486,6 @@ body {
   }
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .two-columns {
     flex-direction: column-reverse;
@@ -486,15 +506,18 @@ body {
   }
 }
 
-/* CARDS SECTION */
+/*--------------------------------------
+  SECTION CARDS
+--------------------------------------*/
 .cards-section {
   padding: 10vh 8vw;
   text-align: center;
   font-family: monospace;
-  .text{
+
+  .text {
     display: flex;
     align-items: center;
-  
+
     h2 {
       font-size: 5rem;
       text-align: left;
@@ -547,8 +570,8 @@ body {
           font-size: 1rem;
           text-transform: uppercase;
           opacity: 0.6;
-          white-space: nowrap;        
-          text-overflow: ellipsis; 
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
 
         p {
@@ -600,7 +623,9 @@ body {
   }
 }
 
-/* CAROUSEL */
+/*--------------------------------------
+  SECTION CAROUSEL
+--------------------------------------*/
 .carousel-section {
   padding: 10vh 8vw;
   background: #000;
@@ -637,7 +662,7 @@ body {
       display: flex;
       height: 100%;
       gap: var(--spacing);
-      padding: 0 ;
+      padding: 0;
       overflow-x: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
@@ -668,6 +693,7 @@ body {
       }
     }
   }
+
   &::before {
     content: "";
     position: absolute;
@@ -688,36 +714,40 @@ body {
 
 @keyframes rotate-infinite {
   from {
-      transform: translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
   to {
-      transform: translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 }
 
-/* BOUTON  */
+/*--------------------------------------
+  BOUTON ANIMÉ
+--------------------------------------*/
 .animated-button {
-  font-size:16px;
+  font-size: 16px;
   font-weight: 600;
   background-color: var(--invers-text-color);
   padding: 1rem 3rem;
   margin-top: 2rem;
-  display:flex;
-  align-items:center;
-  border-radius:99px;
+  display: flex;
+  align-items: center;
+  border-radius: 99px;
   border-color: var(--invers-text-color);
-  position:relative;
-  transition: all .5s cubic-bezier(.77,0,.175,1);
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 
   .button-text {
-    color:#fff;
-    line-height:1;
-    position:relative;
-    z-index:5;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+    z-index: 5;
   }
 }
 
-/* FW-BUTTON  */
+/*--------------------------------------
+  SECTION CONTACT / CTA
+--------------------------------------*/
 .contact-cta {
   margin: 15vh 8vw;
   text-align: center;
@@ -764,7 +794,9 @@ body {
   }
 }
 
-/* FOOTER  */
+/*--------------------------------------
+  FOOTER
+--------------------------------------*/
 footer {
   color: var(--text-color);
   margin: 3rem 2vw 1rem;
@@ -796,19 +828,22 @@ footer {
       flex-wrap: wrap;
       justify-content: center;
       font-size: 2rem;
-      nav ul{
+
+      nav ul {
         list-style-type: none;
         padding: 0;
         text-align: center;
         display: flex;
         gap: 3rem;
-        li{
+
+        li {
           a {
             text-decoration: none;
             color: var(--text-color);
             font-weight: 600;
             transition: color 0.3s ease;
             font-size: 2rem;
+
             &:hover {
               color: var(--primary-color);
             }
@@ -834,7 +869,9 @@ footer {
   }
 }
 
-/******************************************************** DASHBOARD ***********************************************/
+/*--------------------------------------
+  DASHBOARD (WRAPPER, SIDEBAR, MAIN, FORM)
+--------------------------------------*/
 .dashboard-wrapper {
   display: flex;
 }
@@ -899,3 +936,75 @@ footer {
   }
 }
 
+/*--------------------------------------
+  STYLES QLOCKTWO
+--------------------------------------*/
+
+.qlocktwo-container{
+  display: flex;
+  justify-content: center;
+  background-color: azure;
+  margin: 5rem 13rem;
+  border-radius: 2rem;  
+  padding: 2rem;
+  height: auto;
+  position: relative;
+
+  .qlocktwo {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 0.5vmin;
+    width: 145vmin;
+    height: 59vmin;
+    user-select: none;
+    .letter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5vmin;
+      background-color: var(--tertiary-color);
+      color: var(--text-color); /* couleur par défaut pour toutes les lettres */
+      transition: color 0.3s ease;
+      &:hover{
+        scale: 1.1;
+      }
+    }
+    .letter.domain {
+      color: var(--invers-text-color);
+      background-color: var(--fourth-color); /* couleur différente pour les domaines */
+    }
+  }
+
+  
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 107%;
+    height: 24vh;
+
+    background-image: url('/img/slogan-la-ou-pala.png');
+    background-size: contain;   
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: rotate-infinite 5s linear infinite;
+
+    transform: translate(-50%, -50%);
+    top: -15%;
+    left: 1%;
+  }
+}
+
+
+@keyframes rotate-infinite {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
